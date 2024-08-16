@@ -23,15 +23,15 @@ try {
         }
     }
 
-//    while($listItem = $redis->lRange("$ns:job", 0, 1)) {
-//        $file = ($redis->lPop("$ns:job"));
-//        $res = $redis->mGet(["$ns:res:$file"]);
-//        if ($res[0] === false) {
-//            $redis->blPop("$ns:res", 1);
-//        } else {
-//            echo "$file $res\r\n";
-//        }
-//    }
+    while($listItem = $redis->lRange("$ns:job", 0, 1)) {
+        $file = ($redis->lPop("$ns:job"));
+        $res = $redis->mGet(["$ns:res:$file"]);
+        if ($res[0] === false) {
+            $redis->blPop("$ns:res", 1);
+        } else {
+            echo "$file $res\r\n";
+        }
+    }
 
     echo 0;
 } catch (RedisException $e) {
